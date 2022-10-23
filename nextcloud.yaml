@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  nextcloud:
+    image: nextcloud
+    ports:
+    - 8095:80
+    volumes:
+    - nextcloud:/var/www/html
+    - apps:/var/www/html/custom_apps
+    - config:/var/www/html/config
+    - data:/var/www/html/data
+    - theme:/var/www/html/themes/ifm_theme
+
+volumes:
+  nextcloud:
+  apps:
+  config:
+  data:
+  theme:

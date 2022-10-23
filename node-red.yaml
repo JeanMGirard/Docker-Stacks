@@ -1,0 +1,15 @@
+version: "3.7"
+
+# https://nodered.org/docs/getting-started/docker
+services:
+  node-red:
+    image: nodered/node-red:latest
+    environment:
+      - TZ=America/New_York
+    ports:
+      - 1880:1880
+    volumes:
+      - node_red:/data
+
+volumes:
+  node_red:

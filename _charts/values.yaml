@@ -1,0 +1,76 @@
+replicaCount: 1
+enabled: true
+
+ingress:
+  enabled: false
+
+# -------------------------------------------------------------
+
+che:
+  enabled: false
+  service:
+    port: 9070
+
+Jenkins:
+  enabled: false
+Nexus:
+  enabled: false
+
+Gitlab:
+  enabled: false
+  service:
+    ports:
+      http: 9010
+      https: 9011
+      ssl: 9012
+
+
+rabbitmq:
+  enabled: false
+  service:
+    port: 9040
+
+Neo4J:
+  enabled: false
+  nameOverride: neo4j
+  service:
+    ports:
+      http: 7474
+      https: 7473
+      bolt: 7687
+      shell: 1037
+
+MongoDB:
+  enabled: false
+  service:
+    port: 9088
+  mongodbUsername: mymongo
+  mongodbPassword: mypass
+  mongodbDatabase: dvs-db
+  persistence.storageClass: mongo-pvc
+
+Redis:
+  enabled: false
+
+FileCloud:
+  enabled: false
+
+kubernetes-dashboard:
+  enabled: false
+
+coredns:
+  enabled: false
+
+openldap:
+  enabled: false
+  fullnameOverride: openldap
+  nameOverride: openldap
+  persistence:
+    enabled: true
+    storageClass: openldap
+    size: 5Gi
+    accessMode: ReadWriteOnce
+  service:
+    type: LoadBalancer
+    ldapPort: 9041
+    sslLdapPort: 9042

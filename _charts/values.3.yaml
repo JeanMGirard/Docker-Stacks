@@ -1,0 +1,71 @@
+enabled: false
+
+# ------------------------------------------------------------
+Nexus:
+  enabled: false
+Jenkins:
+  enabled: false
+kubernetes-dashboard:
+  enabled: false
+che:
+  enabled: false
+Gitlab:
+  enabled: false
+rabbitmq:
+  enabled: false
+Neo4J:
+  enabled: false
+MongoDB:
+  enabled: false
+Redis:
+  enabled: false
+FileCloud:
+  enabled: false
+coredns:
+  enabled: false
+openldap:
+  enabled: false
+
+docker-registry:
+image.pullPolicy`IfNotPresent`  |
+image.repository`  `registry`      |
+| `image.tag`               `2.6.2`         |
+| `imagePullSecrets`      | `nil` (does not add image pull secrets to deployed pods) |
+| `persistence.accessMode `ReadWriteOnce` |
+| `persistence.enabled`    | `false`         |
+| `persistence.size`     | `10Gi`          |
+| `persistence.storageClass`   | `-`             |
+| `persistence.existingClaim` |   | `nil`           |
+| `service.port`         | `5000`          |
+| `service.type`         | `ClusterIP`     |
+| `service.clusterIP`       `nil`           |
+| `service.nodePort`         | `nil`           |
+| `replicaCount`              | k8s replicas                                                                               | `1`             |
+| `updateStrategy`            | update strategy for deployment                                                             | `{}`            |
+| `podAnnotations`            | Annotations for pod                                                                        | `{}`            |
+| `resources.limits.cpu`      | Container requested CPU                                                                    | `nil`           |
+| `resources.limits.memory`   | Container requested memory                                                                 | `nil`           |
+| `priorityClassName      `   | priorityClassName                                                                          | `""`            |
+| `storage`                   | Storage system to use                                                                      | `filesystem`    |
+| `tlsSecretName`             | Name of secret for TLS certs                                                               | `nil`           |
+| `secrets.htpasswd`          | Htpasswd authentication                                                                    | `nil`           |
+| `secrets.s3.accessKey`      | Access Key for S3 configuration                                                            | `nil`           |
+| `secrets.s3.secretKey`      | Secret Key for S3 configuration                                                            | `nil`           |
+| `secrets.swift.username`    | Username for Swift configuration                                                           | `nil`           |
+| `secrets.swift.password`    | Password for Swift configuration                                                           | `nil`           |
+| `haSharedSecret`            | Shared secret for Registry                                                                 | `nil`           |
+| `configData`                | Configuration hash for docker                                                              | `nil`           |
+| `s3.region`                 | S3 region                                                                                  | `nil`           |
+| `s3.bucket`                 | S3 bucket name                                                                             | `nil`           |
+| `s3.encrypt`                | Store images in encrypted format                                                           | `nil`           |
+| `s3.secure`                 | Use HTTPS                                                                                  | `nil`           |
+| `swift.authurl`             | Swift authurl                                                                              | `nil`           |
+| `swift.container`           | Swift container                                                                            | `nil`           |
+| `nodeSelector`              | node labels for pod assignment                                                             | `{}`            |
+| `tolerations`               | pod tolerations                                                                            | `[]`            |
+| `ingress.enabled`           | If true, Ingress will be created                                                           | `false`         |
+| `ingress.annotations`       | Ingress annotations                                                                        | `{}`            |
+| `ingress.labels`            | Ingress labels                                                                             | `{}`            |
+| `ingress.path`              | Ingress service path                                                                       | `/`             |
+| `ingress.hosts`             | Ingress hostnames                                                                          | `[]`            |
+| `ingress.tls`               | Ingress TLS configuration (YAML)                                                           | `[]`            |

@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  traefik:
+    image: traefik
+    command: --web --docker --docker.domain=docker.localhost --logLevel=INFO --docker.exposedbydefault=false
+    ports:
+      - 3000:80
+      - 3001:8080
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /dev/null:/traefik.toml
+
+
+networks:
+  ifm:
+    external: true

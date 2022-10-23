@@ -1,0 +1,37 @@
+enabled: false
+
+# ------------------------------------------------------------
+Nexus:
+  enabled: false
+  services:
+    http:
+      port: 9020
+    docker:
+      http: 9021
+      https: 9022
+
+Jenkins:
+  enabled: true
+  service:
+    port: 9000
+
+kubernetes-dashboard:
+  enabled: false
+che:
+  enabled: false
+Gitlab:
+  enabled: false
+rabbitmq:
+  enabled: false
+Neo4J:
+  enabled: false
+MongoDB:
+  enabled: false
+Redis:
+  enabled: false
+FileCloud:
+  enabled: false
+coredns:
+  enabled: false
+openldap:
+  enabled: false

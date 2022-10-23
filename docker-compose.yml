@@ -1,0 +1,19 @@
+version: "3.5"
+
+networks:
+  default:
+
+  frontend:
+    driver: overlay
+    ipam:
+      driver: default
+      #config:
+      #- subnet: ${SUBNET_FRONT}
+
+  backend:
+    driver: overlay
+    internal: true
+    attachable: true
+    ipam:
+      driver: default
+

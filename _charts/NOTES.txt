@@ -1,0 +1,24 @@
+
+---- SERVICES ----------------------------
+Jenkins {{ .Values.Jenkins.service.port }}
+
+#kubectl apply -f https://raw.githubusercontent.com/Azure/helm-charts/master/docs/prerequisities/helm-rbac-config.yaml
+
+helm init; sleep 60;
+helm install ./ --name dvs-1; sleep 60
+helm reset; sleep 60
+helm init --service-account tiller
+
+
+helm install ./ -f ./values.1.yaml --name dvs-dashboard
+helm install ./ -f ./values.2.yaml --name dvs-ci
+
+
+helm delete --purge dvs-1; sleep 15; helm install ./ --name dvs-1
+helm del $(helm ls --all --short) --purge
+helm upgrade --reset-values
+helm fetch --untar [chart]
+
+helm init --service-account tiller;
+helm reset
+helm reset --remove-helm-home -f

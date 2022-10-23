@@ -1,0 +1,64 @@
+version: "3.7"
+services:
+  plantuml-server:
+    image: plantuml/plantuml-server
+    expose:
+      - 8080
+    networks:
+      - drawionet
+    volumes:
+      - ../configs/drawio/fonts:/usr/share/fonts/drawio
+
+  export-server:
+    image: jgraph/export-server
+    expose:
+      - 8000
+    networks:
+      - drawionet
+    volumes:
+      - ../configs/drawio/fonts:/usr/share/fonts/drawio
+
+  drawio:
+    image: jgraph/drawio
+    ports:
+      - 8443:8443
+      - 8080:8080
+    depends_on:
+      - plantuml-server
+      - export-server
+    networks:
+      - drawionet
+    volumes:
+      - ../configs/drawio/config/PostConfig.js:/usr/local/tomcat/webapps/draw/js/PostConfig.js
+      - ../configs/drawio/config/PreConfig.js:/usr/local/tomcat/webapps/draw/js/PreConfig.js
+      - ../configs/drawio/config/cloud_convert_api_key:/usr/local/tomcat/webapps/draw/WEB-INF/cloud_convert_api_key
+      - ../configs/drawio/config/google_client_id:/usr/local/tomcat/webapps/draw/WEB-INF/google_client_id
+      - ../configs/drawio/config/google_client_redirect_uri:/usr/local/tomcat/webapps/draw/WEB-INF/google_client_redirect_uri
+      - ../configs/drawio/config/google_client_secret:/usr/local/tomcat/webapps/draw/WEB-INF/google_client_secret
+      - ../configs/drawio/config/msgraph_client_id:/usr/local/tomcat/webapps/draw/WEB-INF/msgraph_client_id
+      - ../configs/drawio/config/msgraph_client_redirect_uri:/usr/local/tomcat/webapps/draw/WEB-INF/msgraph_client_redirect_uri
+      - ../configs/drawio/config/msgraph_client_secret:/usr/local/tomcat/webapps/draw/WEB-INF/msgraph_client_secret
+    environment:
+      PLANTUML_URL: http://plantuml-server:8080/
+      EXPORT_URL: http://image-export:8000/
+#      PUBLIC_DNS: domain
+#      ORGANISATION_UNIT: unit
+#      ORGANISATION: org
+#      CITY: city
+#      STATE: state
+#      COUNTRY_CODE: country
+#      DRAWIO_GITLAB_URL: http://mygitlab.net
+#      DRAWIO_GITLAB_ID: change_to_your_app_id
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://domain:8080 || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+networks:
+  drawionet:
+
+volumes:
+  drawio:

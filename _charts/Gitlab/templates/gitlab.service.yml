@@ -1,0 +1,35 @@
+{{- if .Values.enabled }}
+#  kubectl apply -f docker-registry.service.yml
+#  kubectl delete -f docker-registry.service.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab
+  labels:
+    app: gitlab
+spec:
+  ports:
+  - protocol: TCP
+    port: {{ .Values.service.ports.https }}
+    targetPort: 443
+    # nodePort: 30410
+    name: "gitlab-https"
+  - protocol: TCP
+    port: {{ .Values.service.ports.http }}
+    targetPort: 80
+    # nodePort: 30411
+    name: "gitlab-http"
+  - protocol: TCP
+    port: {{ .Values.service.ports.ssl }}
+    targetPort: 22
+    # nodePort: 30412
+    name: "gitlab-ssl"
+  selector:
+    app: gitlab
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost
+{{- end }}

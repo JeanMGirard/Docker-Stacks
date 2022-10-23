@@ -1,0 +1,35 @@
+enabled: false
+
+# ------------------------------------------------------------
+kubernetes-dashboard:
+  enabled: true
+  fullnameOverride: 'kubernetes-dashboard'
+  nameOverride: kubernetes-dashboard
+  serviceAccount:
+    name: kubernetes-dashboard
+  extraArgs:
+    - --authentication-mode=basic
+    - --enable-insecure-login
+
+che:
+  enabled: false
+Jenkins:
+  enabled: false
+Gitlab:
+  enabled: false
+Nexus:
+  enabled: false
+rabbitmq:
+  enabled: false
+Neo4J:
+  enabled: false
+MongoDB:
+  enabled: false
+Redis:
+  enabled: false
+FileCloud:
+  enabled: false
+coredns:
+  enabled: false
+openldap:
+  enabled: false

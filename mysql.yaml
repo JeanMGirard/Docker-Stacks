@@ -1,0 +1,14 @@
+version: "3.7"
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ifmadmin
+      MYSQL_DATABASE: IFM
+      MYSQL_USER: ifmadm
+      MYSQL_PASSWORD: 4243FDGgre5438fsdf
+    volumes:
+      #  - ./data:/var/lib/mysql
+      - ../mysql/dump:/docker-entrypoint-initdb.d

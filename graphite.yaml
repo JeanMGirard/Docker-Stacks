@@ -1,0 +1,12 @@
+# http://graphiteapp.org/quick-start-guides/
+version: '3.7'
+services:
+  graphite:
+    image: graphiteapp/graphite-statsd
+    restart: always
+    ports:
+      - 80:80
+      - 2003-2004:2003-2004
+      - 2023-2024:2023-2024
+      - 8125:8125/udp
+      - 8126:8126

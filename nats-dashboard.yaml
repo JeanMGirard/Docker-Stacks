@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  nats-server:
+    image: nats:latest
+    ports:
+      - 4222:4222
+      - 8222:8222
+      - 6222:6222
+
+  nats-dashboard:
+    build:
+      context: .
+      dockerfile: ./.natsboard.dockerfile
+    links:
+      - nats-server
+    ports:
+    - 3002:3000
+
+    command:
+      - --nats-mon-url http://nats-server:4222

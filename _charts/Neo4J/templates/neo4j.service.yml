@@ -1,0 +1,37 @@
+{{- if .Values.enabled }}
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j
+  labels:
+    app: neo4j
+spec:
+  selector:
+    app: neo4j
+  type: LoadBalancer
+  ports:
+  - name: neo4j-http
+    protocol: TCP
+    port: {{ .Values.service.ports.http }}
+    targetPort: 7474
+  - name: neo4j-https
+    protocol: TCP
+    port: {{ .Values.service.ports.https }}
+    targetPort: 7473
+  - name: neo4j-bolt
+    protocol: TCP
+    port: {{ .Values.service.ports.bolt }}
+    targetPort: 7687
+  - name: neo4j-shell
+    protocol: TCP
+    port: {{ .Values.service.ports.shell }}
+    targetPort: 1337
+    # nodePort: 30408
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost
+#    - hostname: localhost
+
+{{- end }}

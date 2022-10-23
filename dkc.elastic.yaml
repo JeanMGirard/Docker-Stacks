@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+
+  kibana:
+    image: kibana
+    container_name: elastic_kibana
+    ports:
+      - 5601:5601
+    networks:
+      - elastic-net
+
+  elasticsearch:
+    image: elasticsearch:7.1.0
+    container_name: elastic_search
+    environment:
+    #  - cluster.name=docker-cluster
+    #  - bootstrap.memory_lock=true
+    #  - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.type=single-node"
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - elastic-net
+
+  logstash:
+    image: logstash:7.1.1
+    volumes:
+      - ~/settings/:/usr/share/logstash/config/
+
+networks:
+  elastic-net:
+    driver: overlay
+    attachable: true
+
+

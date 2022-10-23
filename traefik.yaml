@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  traefik:
+    image: traefik:v2.2  # official v2 Traefik docker image
+    command: --api.insecure=true --providers.docker  # Enables the web UI and tells Traefik to listen to docker
+    ports:
+      - 8080:80
+      - 8090:8080 # The Web UI (enabled by --api.insecure=true)
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  # A container that exposes an API to show its IP address
+  # docker-compose up -d --scale whoami=2
+  whoami:
+    image: containous/whoami
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"

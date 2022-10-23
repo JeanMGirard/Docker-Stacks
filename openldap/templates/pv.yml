@@ -1,0 +1,19 @@
+{{- if .Values.enabled }}
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: openldap-pv
+  labels:
+    app: {{ template "openldap.name" . }}
+    chart: {{ template "openldap.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  storageClassName: openldap
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: '/e/data/DeveloperSuite/openldap'
+{{- end }}

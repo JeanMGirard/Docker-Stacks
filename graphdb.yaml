@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  graphdb:
+    container_name: graphdb-name
+    image: ontotext/graphdb:9.1.1-ee
+    ports:
+    - 7200:7200
+    volumes:
+    - graphdb_home:/opt/graphdb/home
+volumes:
+  graphdb_home:
