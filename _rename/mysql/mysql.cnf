@@ -1,4 +1,0 @@
-[mysqld]
-datadir=E:/Network/databases/MySQL/data
-port = 6610
-# default_authentication_plugin=mysql_native_password

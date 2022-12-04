@@ -1,0 +1,17 @@
+
+enabled: true
+service:
+  port: 80
+
+
+
+replicas: 1
+
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+ingress:
+  enabled: false

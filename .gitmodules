@@ -1,0 +1,3 @@
+[submodule ".vendor/jessfraz/dockerfiles"]
+	path = .vendor/jessfraz/dockerfiles
+	url = https://github.com/jessfraz/dockerfiles.git
