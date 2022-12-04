@@ -1,0 +1,27 @@
+version: "3.5"
+services:
+  mongo-express:
+    image: mongo-express
+    expose:
+      - 8081
+    environment:
+      ME_CONFIG_OPTIONS_EDITORTHEME: "ambiance"
+      ME_CONFIG_MONGODB_SERVER: web_db_1
+      ME_CONFIG_BASICAUTH_USERNAME: user
+      ME_CONFIG_BASICAUTH_PASSWORD: "sd99fdfsd45436FSAR"
+    networks:
+      - backend
+
+
+networks:
+  backend:
+
+    # docker run -it --rm \
+    #    --network web_default \
+    #    --name mongo-express \
+    #    -p 8081:8081 \
+    #    -e ME_CONFIG_OPTIONS_EDITORTHEME="ambiance" \
+    #    -e ME_CONFIG_MONGODB_SERVER="web_db_1" \
+    #    -e ME_CONFIG_BASICAUTH_USERNAME="user" \
+    #    -e ME_CONFIG_BASICAUTH_PASSWORD="fairly long password" \
+    #    mongo-express

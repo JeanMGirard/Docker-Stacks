@@ -1,0 +1,19 @@
+dn: dc=dimgo,dc=net
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: dimgo net
+dc: dimgo
+
+dn: cn=Manager,dc=dimgo,dc=net
+objectClass: organizationalRole
+cn: Manager
+description: Directory Manager
+
+dn: ou=People,dc=dimgo,dc=net
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=dimgo,dc=net
+objectClass: organizationalUnit
+ou: Group 

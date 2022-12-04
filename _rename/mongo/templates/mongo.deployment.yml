@@ -1,0 +1,38 @@
+{{- if .Values.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels:
+    app: mongo
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:3.4
+        tty: {{ .Values.tty }}
+        stdin: {{ .Values.stdin }}
+        command: ["mongod"]
+        args: ["--dbpath='/data/db' --bind_ip_all"]
+        #env:
+        #- name: NEO4J_AUTH
+        #  value: "none"
+        ports:
+        - containerPort: 8081
+          name: mongo
+        volumeMounts:
+        - name: mongo-data
+          mountPath: '/data/db'
+      volumes:
+      - name: mongo-data
+        persistentVolumeClaim:
+          claimName: mongo-data-pvc
+{{- end }}

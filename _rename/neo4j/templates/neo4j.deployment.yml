@@ -1,0 +1,67 @@
+{{- if .Values.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neo4j-deployment
+  labels:
+    app: neo4j
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: neo4j
+  template:
+    metadata:
+      labels:
+        app: neo4j
+    spec:
+      containers:
+      - name: neo4j
+        image: neo4j:3.4
+        tty: {{ .Values.tty }}
+        stdin: {{ .Values.stdin }}
+        env:
+        - name: NEO4J_CONF
+          value: "/conf"
+        ports:
+        - containerPort: 7474
+          name: "neo4j-http"
+        - containerPort: 7473
+          name: "neo4j-https"
+        - containerPort: 7687
+          name: "neo4j-bolt"
+        - containerPort: 1337
+          name: "neo4j-shell"
+        volumeMounts:
+        - name: neo4j-data
+          mountPath: '/data'
+        - name: neo4j-logs
+          mountPath: '/logs'
+        - name: neo4j-config
+          mountPath: '/conf'
+        - name: neo4j-ssl
+          mountPath: '/ssl'
+        - name: neo4j-plugins
+          mountPath: '/plugins'
+        - name: neo4j-imports
+          mountPath: '/imports'
+      volumes:
+      - name: neo4j-data
+        persistentVolumeClaim:
+          claimName: neo4j-data-pvc
+      - name: neo4j-logs
+        persistentVolumeClaim:
+          claimName: neo4j-logs-pvc
+      - name: neo4j-config
+        persistentVolumeClaim:
+          claimName: neo4j-config-pvc
+      - name: neo4j-ssl
+        persistentVolumeClaim:
+          claimName: neo4j-ssl-pvc
+      - name: neo4j-plugins
+        persistentVolumeClaim:
+          claimName: neo4j-plugins-pvc
+      - name: neo4j-imports
+        persistentVolumeClaim:
+          claimName: neo4j-imports-pvc
+{{- end }}

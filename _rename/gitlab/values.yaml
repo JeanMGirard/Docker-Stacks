@@ -1,0 +1,14 @@
+enabled: true
+service:
+  ports:
+    http: 8090
+    https: 8091
+    ssl: 8092
+
+
+replicas: 1
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

@@ -1,0 +1,17 @@
+{{- if .Values.enabled }}
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: che-pv
+  labels:
+    app: che
+    type: local
+spec:
+  storageClassName: che
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: '/e/data/DeveloperSuite/che'
+{{- end }}

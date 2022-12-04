@@ -1,0 +1,14 @@
+enabled: true
+replicas: 1
+
+services:
+  docker:
+    http: 5000
+    https: 5001
+  http:
+    port: 9020
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

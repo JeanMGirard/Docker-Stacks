@@ -1,0 +1,17 @@
+{{- if .Values.enabled }}
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: redis-pv
+  labels:
+    app: redis
+    type: local
+spec:
+  storageClassName: redis
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: '/e/data/DeveloperSuite/redis'
+{{- end }}

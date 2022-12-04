@@ -1,0 +1,37 @@
+{{- if .Values.enabled }}
+#  kubectl apply -f docker-registry.service.yml
+#  kubectl delete -f docker-registry.service.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexus
+  labels:
+    app: nexus
+spec:
+  ports:
+  - protocol: TCP
+    port: {{ .Values.services.http.port }}
+    targetPort: 8081
+    # nodePort: 30400
+    name: "nexus"
+  - protocol: TCP
+    port: {{ .Values.services.docker.http }}
+    targetPort: 5000
+    # nodePort: 30400
+    name: "nexus-docker"
+  - protocol: TCP
+    port: {{ .Values.services.docker.https }}
+    targetPort: 5001
+    # nodePort: 30400
+    name: "nexus-docker2"
+  selector:
+    app: nexus
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: localhost
+    - hostname: repositories.dimgo.net
+
+{{- end }}

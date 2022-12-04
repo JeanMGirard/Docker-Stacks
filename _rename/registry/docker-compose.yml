@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  docker-registry:
+    image: registry:2
+    restart: unless-stopped
+    expose:
+      - 5000
+    networks:
+      - default
+      - frontend
+      - backend
+
+
+networks:
+  default:
+  frontend:
+  backend:
